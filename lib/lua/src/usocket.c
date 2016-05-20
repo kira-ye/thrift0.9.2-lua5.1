@@ -25,7 +25,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-
+#include <netinet/tcp.h> // add by kira
 #include <stdio.h> // TODO REMOVE
 
 #include "socket.h"
@@ -259,6 +259,13 @@ void socket_setblocking(p_socket sock) {
   int flags = fcntl(*sock, F_GETFL, 0);
   flags &= (~(O_NONBLOCK));
   fcntl(*sock, F_SETFL, flags);
+}
+
+///////////////////////////////////////
+// add by kira
+void socket_settcpnodelay(p_socket sock) {
+    int flag = 1;
+    setsockopt(*sock, IPPROTO_TCP, TCP_NODELAY, (void*)&flag, sizeof(flag));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

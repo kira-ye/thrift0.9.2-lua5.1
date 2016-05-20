@@ -1,5 +1,12 @@
 Apache Thrift Changelog
 
+Thrift 0.9.3
+--------------------------------------------------------------------------------
+## Bug
+    * [THRIFT-3196] - Misspelling in lua TBinaryProtocol (stirctWrite => strictWrite)
+    * [THRIFT-3180] - lua plugin: framed transport do not work
+    * [THRIFT-3179] - lua plugin cant connect to remote server because function l_socket_create_and_connect always bind socket to localhost
+    
 Thrift 0.9.2
 --------------------------------------------------------------------------------
 ## Bug

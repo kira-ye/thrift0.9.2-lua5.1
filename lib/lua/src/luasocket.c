@@ -213,6 +213,7 @@ static int l_socket_create(lua_State *L) {
       p_tcp tcp = (p_tcp) lua_newuserdata(L, sizeof(t_tcp));
       settype(L, -2, SOCKET_GENERIC);
       socket_setnonblocking(&sock);
+      socket_settcpnodelay(&sock);
       tcp->sock = sock;
       tcp->timeout = 0;
       return 1; // Return userdata
@@ -347,11 +348,6 @@ static int l_socket_create_and_connect(lua_State *L) {
     // Create the socket
     err = tcp_create(&sock);
     if (!err) {
-      // Bind to any port on localhost
-      err = tcp_bind(&sock, DEFAULT_HOST, 0);
-      if (err) {
-        tcp_destroy(&sock);
-      } else {
         // Connect
         err = tcp_connect(&sock, host, port, timeout);
         if (err) {
@@ -361,11 +357,11 @@ static int l_socket_create_and_connect(lua_State *L) {
           p_tcp tcp = (p_tcp) lua_newuserdata(L, sizeof(t_tcp));
           settype(L, -2, SOCKET_CLIENT);
           socket_setnonblocking(&sock);
+          socket_settcpnodelay(&sock);
           tcp->sock = sock;
           tcp->timeout = timeout;
           return 1; // Return userdata
         }
-      }
     }
   } while (err && __gettime() < end);
 

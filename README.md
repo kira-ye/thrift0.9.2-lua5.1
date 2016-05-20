@@ -1,3 +1,11 @@
+Thrift0.9.2 with lua5.1
+=======================
+Modified: 2016-05-20
+
+fix make problem and some bug with ubuntu14.04
+add nonblocking func to avoid tcp nodelay
+add tutorial lua client
+
 Apache Thrift
 =============
 

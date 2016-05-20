@@ -53,6 +53,7 @@ T_ERRCODE socket_recv(p_socket sock, char *data, size_t len, int timeout,
 
 void socket_setblocking(p_socket sock);
 void socket_setnonblocking(p_socket sock);
+void socket_settcpnodelay(p_socket sock);
 
 T_ERRCODE socket_accept(p_socket sock, p_socket sibling,
                         p_sa addr, socklen_t *addr_len, int timeout);
